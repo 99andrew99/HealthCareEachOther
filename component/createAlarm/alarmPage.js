@@ -22,7 +22,9 @@ import {
   Image,
 } from 'react-native';
 
-export default function AlarmPage({navigation}) {
+export default function AlarmPage({navigation, route}) {
+  const {alarmId, time, alarmName} = route.params;
+
   return (
     <View style={styles.TopContainer}>
       <ImageBackground source={alarmDefaultImg} style={styles.TopBg} />
@@ -30,10 +32,10 @@ export default function AlarmPage({navigation}) {
 
       <View style={styles.currentTimeContainer}>
         <Text style={styles.ampm}>AM</Text>
-        <Text style={styles.currentTime}>08:30</Text>
+        <Text style={styles.currentTime}>{time}</Text>
       </View>
 
-      <Text style={styles.alarmTitle}>고혈압 약 복용</Text>
+      <Text style={styles.alarmTitle}>{alarmName}</Text>
 
       <Text style={styles.audioInfo}>녹음된 소리 재생</Text>
 
