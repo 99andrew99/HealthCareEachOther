@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "366613256505",
+    "project_id": "health-care-byvoice",
+    "storage_bucket": "health-care-byvoice.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:366613256505:android:63e95ca4b2d85c2fdaf0e8",
+        "android_client_info": {
+          "package_name": "com.probhealthcare"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC6MJWsmdaGTlhhCfSq0Vf8LEudQIBJ-xk"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
