@@ -3,6 +3,7 @@ import React, {useState} from 'react';
 import {NavigationContainer} from '@react-navigation/native';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import Config from 'react-native-config';
+import messaging from '@react-native-firebase/messaging';
 
 import {
   Button,
@@ -22,6 +23,17 @@ export default function RegisterPage({navigation}) {
   const [password, setPassword] = useState('');
   const [nickname, setNickname] = useState('');
   const [isEmpty, setIsEmpty] = useState(false);
+  const [deviceKey, setDeviceKey] = useState('');
+
+  const checkToken = async () => {
+    const fcmToken = await messaging().getToken();
+    if (fcmToken) {
+      console.log(fcmToken);
+      setDeviceKey(fcmToken);
+    }
+  };
+
+  checkToken();
 
   const signUpAuth = () => {
     if (email === '' || password === '' || nickname === '') {
@@ -29,16 +41,16 @@ export default function RegisterPage({navigation}) {
       return;
     }
 
-
     fetch(`${Config.REACT_APP_IP_ADDRESS}:8080/api/mvp/register`, {
-      method: "POST",
+      method: 'POST',
       headers: {
         'Content-Type': 'application/json',
       },
       body: JSON.stringify({
-        'memberId': email,
-        'memberName': nickname,
-        'password': password,
+        deviceKey: deviceKey,
+        memberId: email,
+        memberName: nickname,
+        password: password,
       }),
     })
       .then(data => {
@@ -86,7 +98,15 @@ export default function RegisterPage({navigation}) {
           onChangeText={setNickname}
         />
       </View>
-      <View>{isEmpty ? <Text style={styles.errorText}>이메일, 비밀번호, 닉네임을 모두 입력해주세요.</Text> : <></>}</View>
+      <View>
+        {isEmpty ? (
+          <Text style={styles.errorText}>
+            이메일, 비밀번호, 닉네임을 모두 입력해주세요.
+          </Text>
+        ) : (
+          <></>
+        )}
+      </View>
       <View style={styles.SignInBtn}>
         <TouchableOpacity onPress={signUpAuth}>
           <Text style={styles.SignInBtnText}>회원가입</Text>

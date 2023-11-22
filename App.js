@@ -89,6 +89,10 @@ function App() {
   //   }
   // };
 
+  // React.useEffect(() => {
+  //   checkToken();
+  // });
+
   return (
     <NavigationContainer>
       <FCMHandler />
